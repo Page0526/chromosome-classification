@@ -1,0 +1,17 @@
+device: cpu
+batch_size: 32
+epochs: 100
+workers: 2
+train_path: D:/VSC/chromosome-classification/data/train_samples
+test_path: D:/VSC/chromosome-classification/data/train_samples
+classes: 24
+wandb_log: true
+project_name: chromosome-classification
+tags:
+  - efficientnet-b1
+project_config:
+  epochs: 100
+  architecture: EfficientNet-b1
+  dataset: chromosome
+val_split: 0.2
+model_name: resnet50
