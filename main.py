@@ -8,6 +8,7 @@ from timm import create_model
 from torch import nn, optim
 from torchvision import models, transforms
 from torch.utils.data import DataLoader, random_split
+from src.model.resnet50 import ResNet50
 from src.data.ChromosomeDataset import ChromosomeDataset, load_images
 from src.train import training_step, evaluation_step, test_step
 
@@ -51,12 +52,14 @@ if __name__=='__main__':
     valloader = DataLoader(valset, batch_size=BATCH_SIZE, shuffle=True, num_workers=workers)
     testloader = DataLoader(testset, batch_size=BATCH_SIZE, shuffle=False, num_workers=workers)
 
-    if model_name == 'resnet50':
+    if model_name == 'resnet50-pretrained':
         model = models.resnet50(pretrained=True)
         
     elif model_name == 'efficientnet':
         model = create_model('efficientnet_b1', pretrained=True)
-        
+    
+    elif model_name == 'resnet50':
+        model = ResNet50(classes, channels=1)
     else:
         model = None
     
@@ -64,12 +67,13 @@ if __name__=='__main__':
     wandb_api_key = os.getenv('WANDB_API_KEY')
     wandb.login(key=wandb_api_key)
 
-    for param in model.parameters():
-        param.requires_grad = False
+    if model_name == 'resnet50-pretrained' or model_name == 'efficientnet':
+        for param in model.parameters():
+            param.requires_grad = False
 
     if model_name == 'efficientnet':
         model.classifier = nn.Linear(model.classifier.in_features, classes)
-    elif model_name == 'resnet50':
+    elif model_name == 'resnet50-pretrained':
         model.fc = nn.Sequential( 
                 nn.Linear(model.fc.in_features, 128),
                 nn.ReLU(),
