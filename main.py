@@ -26,7 +26,7 @@ if __name__=='__main__':
     project_config = config['project_config']
     train_path = config['train_path']
     test_path = config['test_path']
-    val_split = config['val_spit']
+    val_split = config['val_split']
     workers = config['workers']
     classes = config['classes']
 

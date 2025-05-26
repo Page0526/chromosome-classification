@@ -5,7 +5,7 @@ workers: 2
 train_path: D:/VSC/chromosome-classification/data/train_samples
 test_path: D:/VSC/chromosome-classification/data/train_samples
 classes: 24
-wandb_log: true
+wandb_log: false
 project_name: chromosome-classification
 tags:
   - efficientnet-b1
