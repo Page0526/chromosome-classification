@@ -1,6 +1,6 @@
 device: cpu
 batch_size: 32
-epochs: 100
+epochs: 5
 workers: 2
 train_path: D:/VSC/chromosome-classification/data/train_samples
 test_path: D:/VSC/chromosome-classification/data/train_samples
