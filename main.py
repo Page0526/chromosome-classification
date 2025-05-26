@@ -115,5 +115,5 @@ if __name__=='__main__':
     if wandb.run is not None:
         wandb.finish()
     print('Training complete!')
-    avg_loss, accuracy, precision, recall, f1 = test_step(model, testloader, loss_func)
+    avg_loss, accuracy, precision, recall, f1 = test_step(model, testloader, loss_func, classes, device)
     print(f"Test Loss {avg_loss}, Test Accurac {accuracy}, Precision {precision}, Recall {recall}, F1 {f1}")
